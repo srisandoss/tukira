@@ -1,5 +1,12 @@
 "use strict";
 
+// GET BOOK
+export function getBooks() {
+    return {
+        type:"GET_BOOKS"
+    }
+}
+
 // POST BOOK
 export function postBooks(book) {
     return {
@@ -19,7 +26,7 @@ export function deleteBooks(id) {
 // UPADTE A BOOK
 export function updateBooks(book) {
     return {
-        type:"DELETE_BOOK",
+        type:"UPDATE_BOOK",
         payload: book
     }
 }

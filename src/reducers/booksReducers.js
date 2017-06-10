@@ -1,11 +1,30 @@
 "use restict";
 
-export function booksReducers(state={books:[]}, action) {
+//BOOKS REDUCERS
+export function booksReducers(state={
+    books:  [{
+            id: 1,
+            title: "this is the book title1",
+            description: "this is the book desc1",
+            price: 44
+        },
+        {
+            id: 2,
+            title: "this is the book title2",
+            description: "this is the book desc2",
+            price: 55
+        }]
+    }, action) {
     switch(action.type) {
+        case "GET_BOOKS":
+            //let books = state.books.concat(action.payload);
+            //return {books};
+            return {...state, books:[...state.books]}
+            break;
         case "POST_BOOK":
             //let books = state.books.concat(action.payload);
             //return {books};
-            return {books:[...state.books, ...action.payload]}
+            return {...state, books:[...state.books, ...action.payload]}
             break;
         case "DELETE_BOOK":
             //Create a copy of the current array of books
@@ -25,7 +44,7 @@ export function booksReducers(state={books:[]}, action) {
             // Determine at which index in books array is the book to be deleted
             const indexToUpdate = currentBookToUpdate.findIndex(
                 function(book) {
-                    return book.id === action.payload.id;
+                    return book._id === action.payload._id;
                 }
             );
 
@@ -33,9 +52,9 @@ export function booksReducers(state={books:[]}, action) {
                 ...currentBookToUpdate[indexToUpdate],
                 title: action.payload.title
             }
-            console.log("What is it newBookToUpdate: ", newBookToUpdate);
-            return {books: [...currentBookToUpdate.slice(0, indexToDelete), newBookToUpdate,
-                ...currentBookToUpdate.slice(indexToDelete + 1)]}
+           //  console.log("What is it newBookToUpdate: ", newBookToUpdate);
+            return {books: [...currentBookToUpdate.slice(0, indexToUpdate), newBookToUpdate,
+                ...currentBookToUpdate.slice(indexToUpdate + 1)]}
             break;
     }
     return state;

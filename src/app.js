@@ -3,7 +3,7 @@
 //REACT
 import React from 'react';
 import {render} from 'react-dom';
-import {Provider} from 'react-redex';
+import {Provider} from 'react-redux';
 
 import {applyMiddleware, createStore} from "redux";
 import logger from "redux-logger";
@@ -18,40 +18,22 @@ import {postBooks, deleteBooks, updateBooks} from "./actions/booksActions";
 const middleware = applyMiddleware(logger);
 const store = createStore(reducers, middleware);
 
-/*tore.subscribe(function(){
-    console.log("current state is: ", store.getState());
-});*/
-
-import BooksList from "./components/pages/booksList"
+import BooksList from "./components/pages/booksList";
 
 render(
-    
+    <Provider store={store}>
         <BooksList />
-        , document.getElementById("app")
-   
+    </Provider>, document.getElementById("app")
 )
 
-//STEP 2 create and dispatch actions
-
-store.dispatch(postBooks(
-    [{
-        id: 1,
-        title: "this is the book title",
-        description: "this is the book desc",
-        price: 100
-    }],
-    [{
-        id: 2,
-        title: "this is the book title",
-        description: "this is the book desc",
-        price: 200
-    }]
+/*store.dispatch(postBooks(
+      
 ));
 
-//DELETE a book
+
 store.dispatch(deleteBooks(
     {id: 1}
-))
+));
 
 // Update a book
 store.dispatch(updateBooks(
@@ -59,5 +41,8 @@ store.dispatch(updateBooks(
         id: 2,
         title: "Learning"
     }
-))
+));
 
+//-->> CART ACTIONS <<--
+//ADD to CART
+store.dispatch(addToCart([{id:1}]));*/
